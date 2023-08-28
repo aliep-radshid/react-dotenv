@@ -13,15 +13,15 @@ const appPackage = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../
 
 /** Load app's .env file */
 //dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
-if (process.env.MODE == 'DEVELOPMENT') {
+if (process.env.NODE_ENV == 'DEVELOPMENT') {
     dotenv.config({
         path: path.resolve(process.cwd(), '.env.development'),
     });
-} else if (process.env.MODE == 'TEST') {
+} else if (process.env.NODE_ENV == 'TEST') {
     dotenv.config({
         path: path.resolve(process.cwd(), '.env.test'),
     });
-} else if (process.env.MODE == 'PRODUCTION') {
+} else if (process.env.NODE_ENV == 'PRODUCTION') {
     dotenv.config({
         path: path.resolve(process.cwd(), '.env.production'),
     });
