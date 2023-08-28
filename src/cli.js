@@ -12,7 +12,24 @@ const pick = require("lodash/pick");
 const appPackage = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../../package.json")));
 
 /** Load app's .env file */
-dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
+//dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
+if (process.env.MODE == 'DEVELOPMENT') {
+    dotenv.config({
+        path: path.resolve(process.cwd(), '.env.development'),
+    });
+} else if (process.env.MODE == 'TEST') {
+    dotenv.config({
+        path: path.resolve(process.cwd(), '.env.test'),
+    });
+} else if (process.env.MODE == 'PRODUCTION') {
+    dotenv.config({
+        path: path.resolve(process.cwd(), '.env.production'),
+    });
+} else {
+    dotenv.config({
+        path: path.resolve(process.cwd(), '.env'),
+    });
+}
 
 /**
  * Read environment variables whitelist
